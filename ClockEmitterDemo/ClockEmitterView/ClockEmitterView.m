@@ -20,7 +20,7 @@
     CGPoint roundCenter;
     
     NSTimer *timer;
-    NSDate *startTime;
+    NSTimeInterval startTime;
 }
 
 - (id)init
@@ -131,7 +131,7 @@
     CGPathRelease(curvedPath);
     [glowView.layer addAnimation:pathAnimation forKey:@"circleAnimation"];
     
-    startTime = [NSDate date];
+    startTime = CFAbsoluteTimeGetCurrent();
     timer = [NSTimer scheduledTimerWithTimeInterval:1 / 60
                                              target:self
                                            selector:@selector(updateEmitter:)
@@ -151,7 +151,7 @@
 
 - (void)updateEmitter:(NSTimer *)timer
 {
-    NSTimeInterval timerInterval = [startTime timeIntervalSinceDate:[NSDate date]];
+    NSTimeInterval timerInterval = startTime - CFAbsoluteTimeGetCurrent();
     rotateAngle = -M_PI * 2 * timerInterval / self.roundTime;
     CGAffineTransform rotate = CGAffineTransformMakeRotation(rotateAngle);
     glowView.transform = rotate;
