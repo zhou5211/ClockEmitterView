@@ -132,7 +132,7 @@
     [glowView.layer addAnimation:pathAnimation forKey:@"circleAnimation"];
     
     startTime = CFAbsoluteTimeGetCurrent();
-    timer = [NSTimer scheduledTimerWithTimeInterval:1 / 60
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.2
                                              target:self
                                            selector:@selector(updateEmitter:)
                                            userInfo:nil
